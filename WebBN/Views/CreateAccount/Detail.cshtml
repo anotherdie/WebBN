@@ -1,0 +1,127 @@
+﻿@model WebBN.ViewModel.AccountDetail
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<form method="post" asp-action="Detail">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Account - Detail</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="IBAN_No"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="IBAN_No" id="txt_iban_no" class="form-control" />
+
+                    </div>
+                    <div class="col-4">
+                        <input type="submit" class="btn btn-info w-75" value="Retrive" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="FirstName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="FirstName" id="txt_firstname" class="form-control" readonly="readonly" />
+
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="LastName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="LastName" id="txt_lastname" class="form-control" readonly="readonly" />
+
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CID"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="CID" id="txt_cid" class="form-control" readonly="readonly" />
+
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="AccountName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="AccountName" id="txt_accountname" class="form-control" readonly="readonly" />
+
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Deposit_Amount"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Deposit_Amount" id="txt_deposit-amount" class="form-control" readonly="readonly" />
+
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="border p-2">
+    <div class="form-group row">
+        <h2 class="text-black-50 pl-2">Transaction</h2>
+    </div>
+    <div class="form-group row">
+        @if (Model != null)
+        {
+            if (Model.ls_T.Count > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>TranID</th>
+                            <th>TranDate</th>
+                            <th>Type</th>
+                            <th>IBAN_NO</th>
+                            <th>To IBAN_NO</th>
+                            <th>Amount</th>
+                            <th>fee</th>
+                            <th>Amount after fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ls_T)
+                        {
+                            <tr>
+                                <td>@item.TranID</td>
+                                <td>@item.TransDate</td>
+                                <td>@item.Types</td>
+                                <td>@item.IBAN_No</td>
+                                <td>@item.ToIBAN_No</td>
+                                <td>@item.Amount</td>
+                                <td>@item.Fee</td>
+                                <td>@item.AmountAfterFee</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    </div>
+</div>

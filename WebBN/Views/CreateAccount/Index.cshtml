@@ -1,0 +1,126 @@
+﻿@model WebBN.Models.UserAccount
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Create Account</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="IBAN_No"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="IBAN_No" id="txt_iban_no" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="IBAN_No" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <input type="button" onclick="GetIBAN()" id="gen_button" align="middle" class="btn btn-primary" value="Generate IBAN" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="FirstName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="FirstName" id="txt_firstname" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="LastName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="LastName" id="txt_lastname" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CID"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="CID" id="txt_cid" class="form-control" />
+                        <span asp-validation-for="CID" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="AccountName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="AccountName" id="txt_accountname" class="form-control" />
+                        <span asp-validation-for="AccountName" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Deposit_Amount"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Deposit_Amount" id="txt_deposit-amount" class="form-control" />
+                        <span asp-validation-for="Deposit_Amount" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input type="submit" class="btn btn-info w-75" value="Create" />
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-danger w-75" asp-controller="Home" asp-action="Index">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</form>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript" src="~/lib/SpecialScript/lodash.min.js"></script>
+    <script type="text/javascript" src="~/lib/SpecialScript/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/SpecialScript/chance.min.js"></script>
+    <script type="text/javascript" src="~/lib/SpecialScript/mapp4.js"></script>
+
+    <script type="text/javascript">
+
+        function GetIBAN() {
+            var IBAN_No = GetID();
+            $("#txt_iban_no").val(IBAN_No);
+        }
+
+
+
+
+    </script>
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

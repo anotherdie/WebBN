@@ -1,0 +1,56 @@
+﻿@model WebBN.Models.TansactionLog
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post" asp-action="Deposit">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th><label asp-for="IBAN_No"></label></th>
+                <th><label asp-for="Amount"></label></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input asp-for="IBAN_No" class="form-control" />
+                    <span asp-validation-for="IBAN_No" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="Amount" class="form-control" id="txt_amount" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <input type="submit" class="btn btn-info w-75" value="Deposit" />
+                </td>
+                <td colspan="1">
+                    <a class="btn btn-danger w-75" asp-controller="Home" asp-action="Index">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</form>
+
+
+
+@section Scripts{
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

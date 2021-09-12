@@ -1,0 +1,90 @@
+﻿@model WebBN.Models.TansactionLog
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post" asp-action="Transfer">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th><label asp-for="IBAN_No"></label></th>
+                <th><label asp-for="Amount"></label></th>
+                <th><label asp-for="ToIBAN_No"></label></th>
+                <th><label asp-for="Fee"></label></th>
+                <th><label asp-for="AmountAfterFee"></label></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input asp-for="IBAN_No" class="form-control" />
+                    <span asp-validation-for="IBAN_No" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="Amount" class="form-control" onchange="CalAmount()" id="txt_amount" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="ToIBAN_No" class="form-control" />
+                    <span asp-validation-for="ToIBAN_No" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="Fee" class="form-control" readonly="readonly" id="txt_fee" value="@TempData["MsgFee"].ToString()" />
+                    <span asp-validation-for="Fee" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="AmountAfterFee" class="form-control" readonly="readonly" id="txt_real_amount" />
+                    <span asp-validation-for="AmountAfterFee" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="submit" class="btn btn-info w-75" value="Transfer" />
+                </td>
+                <td colspan="2">
+                    <a class="btn btn-danger w-75" asp-controller="Home" asp-action="Index">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</form>
+
+
+@section Scripts{
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script type="text/javascript">
+
+        function CalAmount() {
+            var fee = document.getElementById("txt_fee").value;
+            var Amount = document.getElementById("txt_amount").value;
+            var realAmount = 0;
+            try {
+                realAmount = Amount - (Amount * fee);
+                $("#txt_real_amount").val(realAmount);
+            }
+            catch (err) {
+
+            }
+
+        }
+
+
+
+
+    </script>
+
+}
